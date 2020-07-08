@@ -1,0 +1,15 @@
+.brands {
+  padding: 1rem;
+  background: #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  overflow-x: scroll;
+
+  & .logo {
+    margin: 1rem 2rem;
+    border-radius: 50%;
+    width: 100px;
+  }
+}

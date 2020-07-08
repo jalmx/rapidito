@@ -1,0 +1,36 @@
+* {
+  --color-primary: #531a00;
+  --color-secondary: #d7c4a9;
+  --color-acent: #FF5722;
+}
+
+html,
+body {
+  max-width: 1200px;
+  overflow-x: hidden;
+  margin: auto;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.hidden {
+  display: none !important;
+  @media screen and (max-width: 555px) {
+    display: inline-block !important;
+  }
+}
+
+.titleSection {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+*,
+.colorPrimary {
+  color: var(--color-primary);
+}

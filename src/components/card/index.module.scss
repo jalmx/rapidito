@@ -1,0 +1,61 @@
+.card {
+  $heigth-card: 350px;
+  margin: 0;
+  padding: 0;
+  width: 344px;
+  max-width: 344px;
+  max-height: $heigth-card;
+  min-height: $heigth-card;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  margin: auto;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-primary);
+  overflow: hidden;
+  padding-bottom: .5rem;
+  box-shadow: 2px 2px 5px gray;
+  background-color: var(--color-secondary);
+
+  & .img {
+    max-height: 194px;
+    display: block;
+  }
+
+  & .bodyCard{
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+  }
+  & .title {
+    font-size: 1.3rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    height: auto;
+    padding-top: .25rem;
+  }
+
+  & .description {
+    font-size: 1.03rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    overflow: hidden;
+flex: auto;
+    padding: .5rem 0;
+    color: rgba( var(--color-primary),5.0);
+  }
+  & .btnContainer{
+    text-align: right;
+    padding: .25rem .5rem;
+  }
+  & .btn {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding: .5rem .75rem;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-acent);
+  }
+}
