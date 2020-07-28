@@ -1,7 +1,13 @@
 * {
   --color-primary: #531a00;
   --color-secondary: #d7c4a9;
-  --color-acent: #FF5722;
+  --color-acent: #ff5722;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -11,11 +17,6 @@ body {
   margin: auto;
 }
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 .hidden {
   display: none !important;
   @media screen and (max-width: 555px) {
@@ -33,4 +34,58 @@ body {
 *,
 .colorPrimary {
   color: var(--color-primary);
+}
+
+.main {
+  width: 100%;
+  box-sizing: border-box;
+}
+input[type="submit"],
+button, .btn {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  padding: 0.5rem 0.75rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-acent);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button_cancel{
+  background: white;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  margin-right: 1rem;
+}
+
+.button_cancel:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea {
+  width: 100%;
+  display: block;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+  border: 1px solid var(--color-primary);
+}
+
+.btn_group{
+  width: 100%;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  & > *{
+    margin: 0 .5rem;
+  }
 }

@@ -1,0 +1,25 @@
+# TODO:
+
+## JS
+- [ ] SEO, helmet
+- [ ] Img optimization
+- [x] Blog
+- [x] Login
+- [x] vista para el post dinamicamente
+- [x] La vista (componente) del Post, despues de presionar "Ver más"
+- [x] admin delete post en admin
+- [x] admin productos delete
+- [x] Agregar los productos a firebase
+- [ ] Formulario de contacto envie mensaje a firebase cloud function o al correo
+- [ ] admin edit post en admin
+- [ ] limitar el texto del *abstract* y agregar los puntos al final
+- [ ] Arreglar la fecha en los post
+- [ ] admin productos add
+- [ ] admin productos edit
+- [ ] desplegar los mensajes enviados a la pagina
+- [ ] subir la imagen de local para el post
+
+## CSS
+
+- [ ] el diseño de la vista del producto
+- [ ] Dale estilos al post tipo medium

@@ -1,6 +1,14 @@
 .header {
   padding: 1rem;
   background: var(--color-secondary);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (min-width: 800px) {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .titleHeader {
@@ -9,16 +17,21 @@
   text-align: center;
   margin: 0;
   padding: 1rem 0;
-}
-
-.containerLogo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @media screen and (min-width: 767px) {
+    flex: auto;
+    font-size: 2rem;
+  }
 }
 
 .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 95%;
   max-height: 150px;
   margin: auto;
+
+  @media screen and (min-width: 767px) {
+width: 10%;
+  }
 }

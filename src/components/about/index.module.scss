@@ -1,0 +1,22 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 1rem ;
+
+  & * {
+    padding: 1rem;
+  }
+  & img{
+    padding: 0;
+    display: block;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 760px) {
+   flex-direction: row;
+   & > *{
+     width: 50%;
+   }
+  }
+}

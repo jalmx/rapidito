@@ -1,0 +1,52 @@
+.card {
+  $heigth-card: 350px;
+  margin: 0;
+  padding: 0;
+  width: 344px;
+  max-width: 344px;
+  max-height: $heigth-card;
+  min-height: $heigth-card;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  margin: auto;
+  margin-bottom: 2rem;
+  border: 1px solid var(--color-primary);
+  overflow: hidden;
+  padding-bottom: 0.5rem;
+  box-shadow: 2px 2px 5px gray;
+  background-color: var(--color-secondary);
+
+  & .img {
+    max-height: 194px;
+    display: block;
+  }
+
+  & .bodyCard {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  & .title {
+    font-size: 1.3rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    height: auto;
+    padding-top: 0.25rem;
+  }
+
+  & .description {
+    font-size: 1.03rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    overflow: hidden;
+    flex: auto;
+    padding: 0.5rem 0;
+    color: rgba(var(--color-primary), 5);
+  }
+  & .btnContainer {
+    text-align: right;
+    padding: 0.25rem 0.5rem;
+  }
+}

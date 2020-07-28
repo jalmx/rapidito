@@ -1,0 +1,28 @@
+.admin{
+
+  & h1,h2{
+    text-align: center;
+    font-weight: normal;
+  }
+
+  & .menu_link{
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  & .section{
+    text-decoration: underline;
+  }
+  & nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+  }
+
+  & .add{
+    margin: 1rem auto;
+    display: block;
+  }
+}

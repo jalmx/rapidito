@@ -4,6 +4,8 @@ import "./App.scss";
 import './font/font.scss'
 import { BrowserRouter } from "react-router-dom";
 import Router from "./components/Router";
+import './firebase/initFirebase'
+
 const App = () => (
   <>
     <BrowserRouter>

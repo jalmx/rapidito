@@ -1,0 +1,32 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  @media screen and (min-width: 767px) {
+    flex-direction: row;
+    .part {
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 1rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+.phone {
+  text-align: center;
+  font-weight: normal;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  font-size: 2rem; 
+}
