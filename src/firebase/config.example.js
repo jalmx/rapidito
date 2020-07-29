@@ -1,3 +1,16 @@
+// const firebaseConfig = {
+//   apiKey: "***",
+//   authDomain: "****",
+//   databaseURL: "***",
+//   projectId: "**",
+//   storageBucket: "***",
+//   messagingSenderId: "***",
+//   appId: "****",
+//   measurementId: "****"
+// };
+
+// export default firebaseConfig
+
 const firebaseConfig = {
   apiKey: "AIzaSyC9zj3TcQKz2KzQyEOVGjkSWdu6ybIQsMk",
   authDomain: "rapidito-gourmet.firebaseapp.com",

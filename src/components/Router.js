@@ -54,7 +54,6 @@ class Router extends Component {
 
   onHandlerLogIn = (e) => {
     e.preventDefault();
-    console.log(e.target);
     const { user, pwd } = e.target;
     login(user.value, pwd.value).catch((err) => console.error(err));
   };

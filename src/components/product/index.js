@@ -16,7 +16,7 @@ const Card = (props) => {
   const { title, abstract, imgUrl, body, id, admin } = props;
   const alt = abstract;
   const path = `/productos/${generateUrl(title).toLowerCase()}`;
-console.log("id", id)
+
   const toProduct = {
     pathname: path,
     state: {

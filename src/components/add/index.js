@@ -81,7 +81,7 @@ const EditorRapidito = (props) => {
               return (window.location = "/admin");
             })()
       )
-      .catch((err) => console.log("Fallo subir el post"));
+      .catch((err) => alert("Fallo subir el post"));
   };
 
   const onSaveProduct = () => {
@@ -107,11 +107,10 @@ const EditorRapidito = (props) => {
               return (window.location = "/admin");
             })()
       )
-      .catch((err) => console.log("Fallo subir el Product"));
+      .catch((err) => alert("Fallo subir el Product"));
   };
 
   const onSave = (type) => {
-    console.log(type)
     type.toLowerCase() === "producto" ? onSaveProduct() : onSavePost();
   };
 
