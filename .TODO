@@ -1,7 +1,6 @@
 # TODO:
 
 ## JS
-- [ ] SEO, helmet
 - [ ] Img optimization
 - [x] Blog
 - [x] Login
@@ -12,7 +11,9 @@
 - [x] Agregar los productos a firebase
 - [ ] **Admin**
   - [x] admin productos add
-  - [ ] desplegar los mensajes enviados a la pagina
+  - [ ] **Mensajes**
+    - [x] desplegar los mensajes enviados a la pagina
+    - [ ] Marcar como leido
 - [ ] subir la imagen de local para el post
   - [ ]  **Post**
     - [ ] admin post edit (update)
@@ -22,9 +23,17 @@
     - [ ] admin productos edit (update)
     - [ ] limitar el texto del *abstract* y agregar los puntos al final
 - [ ] Formulario de contacto envie mensaje a firebase cloud function o al correo
-
+- [ ] Generar el html a partir del enlace
+- [ ] Agregar al final de los post y productos una section (componente) para compartir en redes sociales
+- [ ] Agrergar el que puedan colocar comentarios de fb
 
 ## CSS
 
 - [ ] el diseño de la vista del **producto**
 - [ ] Dale estilos al **post** tipo medium
+
+# Misc
+
+- [ ] sitemap
+- [ ] robot.txt
+- [ ] SEO, helmet

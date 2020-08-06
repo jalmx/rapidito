@@ -91,7 +91,7 @@ const EditorRapidito = (props) => {
       "Sin titulo de producto";
     product.imgUrl =
       document.getElementsByName("imgUrl")[0].value.trim() ||
-      "https://lh5.googleusercontent.com/m_ETa2hMH1bjNlJaHfjvw4yAOFsQfGJOl1Xsc-_6UbxufTYuB8avJo8F6in8P7ZBVpysngUhMNy35i2-Wf0T=w790-h725";
+      "https://firebasestorage.googleapis.com/v0/b/rapidito-gourmet.appspot.com/o/rapidito%2Flogo_Rapidito_card.png?alt=media&token=e1735353-824b-4f1f-ace3-67f19f6c529c";
     product.body = getDrafttoHTML() || "";
     product.abstract = state.content;
     product.date = getDate();

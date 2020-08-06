@@ -9,8 +9,8 @@ import Editor from "../add/";
 
 import { getAllPost } from "../../firebase/post";
 
-import messages from "../message/messages";
-import { getAllProduct } from "../../firebase/product";
+import messages from "../message/_messages";
+import MessageSection from "../message/MessageSection";
 const menu = ["Post", "Productos", "Mensajes"];
 
 const getSection = (index, onEditor, type) => {
@@ -42,7 +42,7 @@ const getSection = (index, onEditor, type) => {
       </>
     );
   } else if (index === 2) {
-    component = messages.map((m) => <Message key={uid(10)} {...m} />);
+    component = <MessageSection />
   } else if (index === 3 || index === 4) {
     component = <Editor title={index === 3 ? "Post" : "Producto"} />;
   }
@@ -53,7 +53,6 @@ const getSection = (index, onEditor, type) => {
 const Admin = (props) => {
   const [state, setstate] = useState(0); //sections changes
   const [posts, setPosts] = useState([]);
-  const [products, setProducts] = useState([]);
 
   const onSection = (e) => {
     let section = 0;
@@ -71,8 +70,6 @@ const Admin = (props) => {
 
   useEffect(() => {
     getAllPost().then((postsList) => setPosts(postsList));
-    getAllProduct().then((productList) => setProducts(productList));
-    //TODO: agregar el de los productos
     //TODO: agregar los mensajes
     return () => {};
   }, []);

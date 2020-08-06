@@ -31,22 +31,24 @@ const Card = (props) => {
 
   return (
     <figure key={uid(10)} className={style.card}>
-      <LazyLoad>
-        <img
-          src={imgUrl}
-          alt={alt}
-          className={style.img}
-          width="400px"
-          loading="lazy"
-        />
-      </LazyLoad>
+      <div className={style.containerImg}>
+        <LazyLoad>
+          <img
+            src={imgUrl}
+            alt={alt}
+            className={style.img}
+            width="344px"
+            loading="lazy"
+          />
+        </LazyLoad>
+      </div>
       <div className={style.bodyCard}>
         <h6 className={style.title}>{title}</h6>
         <figcaption className={style.description}>{abstract}</figcaption>
       </div>
       <div className="btn_group">
         {admin ? (
-          <button className="button_cancel" onClick={()=>deleteP(id)}>
+          <button className="button_cancel" onClick={() => deleteP(id)}>
             Eliminar
           </button>
         ) : (

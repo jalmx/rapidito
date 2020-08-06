@@ -1,13 +1,19 @@
 import React from "react";
-import style from './index.module.scss'
+import style from "./index.module.scss";
+import { deleteMessage } from "../../firebase/messages";
 
-const Message = ({ id, name, phone, email, message,date }) => (
+const deleteMessageFromPanel = (id) => {
+  deleteMessage(id);
+  alert("Mensaje eliminado");
+};
+
+const Message = ({ id, name, tel, mail, message, date, read }) => (
   <div className={style.message} id={id}>
     <div>
       Id: <span>{id}</span>
     </div>
     <div>
-      Fecha: <span>{date}</span>
+      Fecha: <span>{date.year}</span>
     </div>
     <div>
       Nombre: <span>{name}</span>
@@ -15,18 +21,23 @@ const Message = ({ id, name, phone, email, message,date }) => (
     <div>
       Teléfono:
       <i className="icon-phone">
-        <a href={`telto:${phone}`}>{phone}</a>
+        <a href={`telto:${tel}`}>{tel}</a>
       </i>
     </div>
     <div>
-      Correo: <a href={`mailto:${email}`}>{email}</a>
+      Correo: <a href={`mailto:${mail}`}>{mail}</a>
     </div>
     <div>
       Mensaje: <span>{message}</span>
     </div>
     <div className="btn_group">
-      <button className="button_cancel">Eliminar</button>
-      <button>Leído</button>
+      <button
+        className="button_cancel"
+        onClick={() => deleteMessageFromPanel(id)}
+      >
+        Eliminar
+      </button>
+      {read ? "" : <button>Leído</button>}
     </div>
   </div>
 );
