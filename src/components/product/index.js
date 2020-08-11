@@ -7,13 +7,15 @@ import { generateUrl } from "../../util/constant";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../firebase/product";
 
+import { EDIT_PRODUCT } from "../../util/constant";
+
 const deleteP = (id) => {
   deleteProduct(id);
   window.location = "/admin";
 };
 
 const Card = (props) => {
-  const { title, abstract, imgUrl, body, id, admin } = props;
+  const { title, abstract, imgUrl, body, id, admin, onEdit } = props;
   const alt = abstract;
   const path = `/productos/${generateUrl(title).toLowerCase()}`;
 
@@ -54,7 +56,13 @@ const Card = (props) => {
         ) : (
           ""
         )}
-        {admin ? <button>Editar</button> : ""}
+        {admin ? (
+          <button onClick={() => onEdit({ type: EDIT_PRODUCT, data: props })}>
+            Editar
+          </button>
+        ) : (
+          ""
+        )}
         <Link to={toProduct} className="btn">
           Ver más
         </Link>

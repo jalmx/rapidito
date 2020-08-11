@@ -1,4 +1,11 @@
+import moment from "moment";
+
 const date = new Date();
+
+export const buildDate = (date) =>
+  moment(
+    `${date ? date.month : ""}-${date ? date.day : ""}-${date ? date.year : ""}`
+  ).fromNow();
 
 export const getDate = () => ({
   day: date.getDate(),

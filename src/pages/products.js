@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../components/layout";
 import ProductSection from "../components/product/productSection";
 
 const Products = (props) => {
-  const [state, setState] = useState([]);
-
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   return (
     <Layout {...props}>
       <section>

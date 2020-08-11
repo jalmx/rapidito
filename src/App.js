@@ -1,10 +1,13 @@
-import React from "react";
-import "normalize.css/normalize.css";
-import "./App.scss";
-import './font/font.scss'
 import { BrowserRouter } from "react-router-dom";
-import Router from "./components/Router";
+import React from "react";
+
+import "normalize.css/normalize.css";
+
 import './firebase/initFirebase'
+import Router from "./components/Router";
+
+import './font/font.scss'
+import "./App.scss";
 
 const App = () => (
   <>

@@ -1,19 +1,53 @@
 import React, { useEffect, useState } from "react";
+
+import { getAllMessage, updateMessage } from "../../firebase/messages";
 import Message from "./";
-import { getAllMessage } from "../../firebase/messages";
 
 const MessageSection = () => {
-  const [messages, setMessages] = useState([]);
+  const [messagesNews, setMessagesNews] = useState([]);
+  const [messagesReads, setMessagesReads] = useState([]);
+
+  const getMessages = async () => {
+    const messages = await getAllMessage();
+    setMessagesNews([]);
+    setMessagesReads([]);
+
+    let readMessages = [];
+    let newMessages = [];
+    for (const m of messages) {
+      m.read ? readMessages.push(m) : newMessages.push(m);
+    }
+
+    setMessagesReads(readMessages);
+    setMessagesNews(newMessages);
+  };
+
+  const onMarkRead = (id) => {
+    updateMessage(
+      messagesNews.reduce((message) => message.id === id)
+    ).then((res) =>
+      res ? alert("Hubo un error al eliminar el mensaje") : getMessages()
+    );
+  };
 
   useEffect(() => {
-    getAllMessage().then((ms) => setMessages(ms));
-
+    getMessages();
     return () => {};
-  }, [messages]);
+  }, []);
+
   return (
     <div>
-      {messages.map((m) => (
-        <Message key={m.id} {...m} />
+      <h1>
+        Mensaje nuevos - <i>({messagesNews.length})</i>
+      </h1>
+      {messagesNews.map((m) => (
+        <Message key={m.id} {...m} onMarkRead={onMarkRead} />
+      ))}
+      <h1>
+        Mensaje Leídos - <i>({messagesReads.length})</i>
+      </h1>
+      {messagesReads.map((m) => (
+        <Message key={m.id} {...m} onDeleteMessage={getMessages} />
       ))}
     </div>
   );

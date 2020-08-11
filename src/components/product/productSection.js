@@ -9,7 +9,7 @@ const style = {
   flexWrap: "wrap",
 };
 
-const ProductoSection = ({ title, admin }) => {
+const ProductoSection = ({ title, admin, onEdit }) => {
   const [state, setState] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const ProductoSection = ({ title, admin }) => {
         {title ? <h1 className="titleSection">{title} </h1> : ""}
         <article style={style}>
           {state.map((product) => (
-            <Card key={uid(10)} {...product} admin={admin} />
+            <Card key={uid(10)} {...product} admin={admin} onEdit={onEdit} />
           ))}
         </article>
       </section>

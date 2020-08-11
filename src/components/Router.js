@@ -1,22 +1,22 @@
-import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import React, { Component } from "react";
 import uid from "uid";
-import Home from "../pages/";
-import Blog from "../pages/blog";
-import Error from "./404";
-import About from "../pages/about";
-import Products from "../pages/products";
-import Contact from "../pages/contact";
-import Login from "../pages/login";
-import Admin from "../pages/admin";
 
 import { firebaseAuth } from "../firebase/initFirebase";
 import { login } from "../firebase/auth";
+import { setUser, removeUser } from "../util/local";
+import About from "../pages/about";
+import Admin from "../pages/admin";
+import Blog from "../pages/blog";
+import Contact from "../pages/contact";
+import Error from "./404";
+import Home from "../pages/";
+import Login from "../pages/login";
+import PostView from "./blog/post";
+import Products from "../pages/products";
+import ProductView from "./product/product";
 
 import menu from "../components/header/menu.json";
-import PostView from "./blog/post";
-import ProductView from "./product/product";
-import { setUser, removeUser } from "../util/local";
 
 const pages = [Home, Products, Blog, About, Contact];
 

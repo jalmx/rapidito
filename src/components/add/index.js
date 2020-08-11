@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
@@ -9,19 +9,30 @@ import {
 } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import style from "./index.module.scss";
-import { savePost, updatePost, getPost } from "../../firebase/post";
-import { saveProduct, updateProduct, getProduct } from "../../firebase/product";
+import { savePost, updatePost } from "../../firebase/post";
+import { saveProduct, updateProduct } from "../../firebase/product";
 import { getDate } from "../../util/date";
+import { EDIT_POST, EDIT_PRODUCT } from "../../util/constant";
 
 const dataProducto = () => (
   <div>
     <input type="number" placeholder="Precio" id="price" min="0" />
-    <input type="number" placeholder="Estrellas" id="start" max="5" min="1" step="1" />
+    <input
+      type="number"
+      placeholder="Estrellas"
+      id="start"
+      max="5"
+      min="1"
+      step="1"
+    />
   </div>
 );
 
 const EditorRapidito = (props) => {
-  const { title } = props;
+  const {
+    title,
+    data: { type, data },
+  } = props;
   const [state, setState] = useState({
     editorState: EditorState.createEmpty(),
     onHTML: "",
@@ -30,8 +41,27 @@ const EditorRapidito = (props) => {
     start: 5,
   });
 
+  const loadData = (data) => {
+    console.log("loadData", data);
+    document.getElementById("title").value = data.title;
+    document.getElementById("imgUrl").value = data.imgUrl;
+    onHTMLtoDraft(data.body);
+    if (data.price) {
+      document.getElementById("price").value = data.price;
+      document.getElementById("start").value = data.start;
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      loadData(data);
+    }
+    return () => {};
+  }, []);
+
   const onEditorStateChange = (editorState) => {
     setState({
+      ...state,
       editorState,
       onHTML: draftToHtml(convertToRaw(state.editorState.getCurrentContent())),
       content: state.editorState.getCurrentContent().getPlainText(),
@@ -46,18 +76,13 @@ const EditorRapidito = (props) => {
     return draftToHtml(convertToRaw(state.editorState.getCurrentContent()));
   };
 
-  const onHTMLtoDraft = () => {
-    // tomo el HTML y lo paso a Draft
-    const blocksFromHTML = convertFromHTML(state.onHTML);
+  const onHTMLtoDraft = (html) => {
+    const blocksFromHTML = convertFromHTML(html);
     const stateNew = ContentState.createFromBlockArray(
       blocksFromHTML.contentBlocks,
       blocksFromHTML.entityMap
     );
-
-    setState({
-      ...state,
-      editorState2: EditorState.createWithContent(stateNew),
-    });
+    onEditorStateChange(EditorState.createWithContent(stateNew));
   };
 
   const onSavePost = () => {
@@ -81,7 +106,7 @@ const EditorRapidito = (props) => {
               return (window.location = "/admin");
             })()
       )
-      .catch((err) => alert("Fallo subir el post"));
+      .catch(() => alert("Fallo subir el post"));
   };
 
   const onSaveProduct = () => {
@@ -95,8 +120,8 @@ const EditorRapidito = (props) => {
     product.body = getDrafttoHTML() || "";
     product.abstract = state.content;
     product.date = getDate();
-    product.price = Number(document.getElementById("price").value.trim()) || 0
-    product.start = Number(document.getElementById("start").value.trim()) || 5
+    product.price = Number(document.getElementById("price").value.trim()) || 0;
+    product.start = Number(document.getElementById("start").value.trim()) || 5;
 
     saveProduct(product)
       .then((err) =>
@@ -114,34 +139,55 @@ const EditorRapidito = (props) => {
     type.toLowerCase() === "producto" ? onSaveProduct() : onSavePost();
   };
 
+  const onUpdatePost = () => {
+    updatePost();
+  };
+  const onUpdateProduct = () => {
+    updateProduct();
+  };
+
+  const onUpdate = (element) => {
+    data.type === EDIT_POST ? onUpdatePost(element) : onUpdateProduct(element);
+  };
+
   return (
-    <div className={style.editorContainer}>
+    <div id="editContainer" className={style.editorContainer}>
       <h1>
         Escribiendo nuevo <span>"{title}"</span>
       </h1>
       <div>
-        <input type="text" name="title" placeholder={`Titulo del ${title}`} />
+        <input
+          id="title"
+          type="text"
+          name="title"
+          placeholder={`Titulo del ${title}`}
+        />
         <input
           type="url"
+          id="imgUrl"
           name="imgUrl"
           placeholder={`Dirección de la imagen`}
         />
-        <input type="file" hidden/>
+        <input type="file" id="imgFile" />
         {title.toLowerCase() === "producto" ? dataProducto() : ""}
       </div>
       <div className={style.editor}>
         <Editor
+          id="editor"
           wrapperClassName="wrapper-class"
           editorClassName="editor-class"
           toolbarClassName="toolbar-class"
           onEditorStateChange={onEditorStateChange}
+          editorState={state.editorState}
         />
       </div>
       <div className="btn_group">
         <button onClick={onCancel} className="button_cancel">
           Cancelar
         </button>
-        <button onClick={() => onSave(title)}>Agregar</button>
+        <button onClick={() => (data ? onSave(title) : onUpdate())}>
+          {data ? "Actualizar" : "Agregar"}
+        </button>
       </div>
     </div>
   );

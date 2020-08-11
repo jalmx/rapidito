@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-import LazyLoad from "react-lazy-load";
-import style from "./index.module.scss";
 import { Link } from "react-router-dom";
+import LazyLoad from "react-lazy-load";
+import React, { useState, useEffect } from "react";
+
+import { buildDate } from "../../util/date";
+import { deletePost as postDelete } from "../../firebase/post";
+import { EDIT_POST } from "../../util/constant";
 import { generateUrl } from "../../util/constant";
-import { deletePost as postDelete, getPost } from "../../firebase/post";
+
+import style from "./index.module.scss";
 
 const deletePost = (id) => {
   postDelete(id);
   alert("Post eliminado");
   window.location = "/admin";
 };
-
-//TODO: update post en el admin
-const editPost = (id) => getPost(id).then((d) => /*console.log(d) */ null);
 
 const BlogSection = (props) => {
   const [statePost, setState] = useState({});
@@ -31,6 +32,7 @@ const BlogSection = (props) => {
         imgUrl: statePost.imgUrl,
         id: statePost.id,
         body: statePost.body,
+        date: statePost.date,
       },
     },
   };
@@ -45,7 +47,7 @@ const BlogSection = (props) => {
         <Link to={toPost}>
           <h2>{statePost.title} </h2>
         </Link>
-        <div>{/* <span>Fecha: {statePost.date}</span> */}</div>
+        <div>{<span>Fecha: {buildDate(statePost.date)}</span>}</div>
         <p>{statePost.abstract}</p>
         <div className="btn_group">
           {statePost.eliminar ? (
@@ -59,7 +61,9 @@ const BlogSection = (props) => {
             ""
           )}
           {statePost.edit ? (
-            <button onClick={() => editPost(statePost.id)}>
+            <button
+              onClick={() => props.onEdit({ type: EDIT_POST, data: statePost })}
+            >
               {statePost.edit}
             </button>
           ) : (

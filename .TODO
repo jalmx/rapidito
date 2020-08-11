@@ -1,31 +1,24 @@
 # TODO:
 
 ## JS
-- [ ] Img optimization
-- [x] Blog
-- [x] Login
-- [x] vista para el post dinamicamente
-- [x] La vista (componente) del Post, despues de presionar "Ver más"
-- [x] admin delete post en admin
-- [x] admin productos delete
-- [x] Agregar los productos a firebase
+
 - [ ] **Admin**
-  - [x] admin productos add
-  - [ ] **Mensajes**
-    - [x] desplegar los mensajes enviados a la pagina
-    - [ ] Marcar como leido
-- [ ] subir la imagen de local para el post
-  - [ ]  **Post**
+  - [ ] Limitar la cantidad de elementos a carga de firebase maximo 10
+  - [ ] Integración con redes sociales al publicar un post
+  - [ ] **Post**
     - [ ] admin post edit (update)
-    - [ ] Arreglar la fecha en los post
-    - [ ] limitar el texto del *abstract* y agregar los puntos al final
+    - [ ] limitar el texto del _abstract_ y agregar los puntos al final
+    - [ ] cargar los datos de la imagen principal del post
+    - [ ] Hacer la peticion del post con el nombrey cargar la pagina
   - [ ] **Products**
     - [ ] admin productos edit (update)
-    - [ ] limitar el texto del *abstract* y agregar los puntos al final
-- [ ] Formulario de contacto envie mensaje a firebase cloud function o al correo
-- [ ] Generar el html a partir del enlace
+    - [ ] limitar el texto del _abstract_ y agregar los puntos al final
+- [ ] **General**
 - [ ] Agregar al final de los post y productos una section (componente) para compartir en redes sociales
 - [ ] Agrergar el que puedan colocar comentarios de fb
+- [ ] **Cloud Function**
+  - [ ] Formulario de contacto envie mensaje a firebase cloud function o al correo
+  - [ ] subir la imagen de local para el post y producto
 
 ## CSS
 
@@ -34,6 +27,7 @@
 
 # Misc
 
+- [ ] Img optimization
 - [ ] sitemap
 - [ ] robot.txt
 - [ ] SEO, helmet

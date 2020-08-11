@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
-import style from "./index.module.scss";
 import uid from "uid";
 
+import { getAllPost } from "../../firebase/post";
+import Editor from "../add/";
+import MessageSection from "../message/MessageSection";
 import Post from "../blog/";
 import Products from "../product/productSection";
-import Message from "../message/";
-import Editor from "../add/";
 
-import { getAllPost } from "../../firebase/post";
+import style from "./index.module.scss";
+import { EDIT_POST } from "../../util/constant";
 
-import messages from "../message/_messages";
-import MessageSection from "../message/MessageSection";
 const menu = ["Post", "Productos", "Mensajes"];
 
-const getSection = (index, onEditor, type) => {
+const getSection = (index, onEditor, type, onEdit, data) => {
   let component = null;
   if (index === 0) {
     component = (
@@ -28,6 +27,7 @@ const getSection = (index, onEditor, type) => {
             more="Ver más"
             edit="Editar"
             eliminar="Eliminar"
+            onEdit={onEdit}
           />
         ))}
       </section>
@@ -38,13 +38,19 @@ const getSection = (index, onEditor, type) => {
         <button className={style.add} onClick={onEditor}>
           Agregar Producto
         </button>
-        <Products admin />
+        <Products admin onEdit={onEdit} />
       </>
     );
   } else if (index === 2) {
-    component = <MessageSection />
+    component = <MessageSection />;
   } else if (index === 3 || index === 4) {
-    component = <Editor title={index === 3 ? "Post" : "Producto"} />;
+    component = (
+      <Editor
+        title={index === 3 ? "Post" : "Producto"}
+        type={data.type}
+        data={data}
+      />
+    );
   }
 
   return component;
@@ -53,9 +59,10 @@ const getSection = (index, onEditor, type) => {
 const Admin = (props) => {
   const [state, setstate] = useState(0); //sections changes
   const [posts, setPosts] = useState([]);
+  const [data, setData] = useState({});
 
   const onSection = (e) => {
-    let section = 0;
+    let section = 0; //post
     if (e.target.id === "productos") {
       section = 1;
     }
@@ -68,9 +75,14 @@ const Admin = (props) => {
     setstate(e.target.textContent.indexOf("Post") > 0 ? 3 : 4);
   };
 
+  //** Elijo que va a cargar el edit*/
+  const onEdit = (data) => {
+    setData(data);
+    setstate(data.type === EDIT_POST ? 3 : 4);
+  };
+
   useEffect(() => {
     getAllPost().then((postsList) => setPosts(postsList));
-    //TODO: agregar los mensajes
     return () => {};
   }, []);
 
@@ -89,7 +101,7 @@ const Admin = (props) => {
           </h2>
         ))}
       </nav>
-      {getSection(state, onEditor, { posts })}
+      {getSection(state, onEditor, { posts }, onEdit, data)}
     </div>
   );
 };
