@@ -1,18 +1,15 @@
-# TODO:
+# TODO
 
 ## JS
 
 - [ ] **Admin**
-  - [ ] Limitar la cantidad de elementos a carga de firebase maximo 10
+  - [ ] Limitar la cantidad de elementos a carga de firebase maximo 6
   - [ ] Integración con redes sociales al publicar un post
+  - [ ] checar las fechas, las pone mal
   - [ ] **Post**
-    - [ ] admin post edit (update)
-    - [ ] limitar el texto del _abstract_ y agregar los puntos al final
-    - [ ] cargar los datos de la imagen principal del post
-    - [ ] Hacer la peticion del post con el nombrey cargar la pagina
+    - [ ] Hacer la peticion del post con el nombre y cargar la pagina
   - [ ] **Products**
-    - [ ] admin productos edit (update)
-    - [ ] limitar el texto del _abstract_ y agregar los puntos al final
+    - [ ] Hacer la peticion del post con el nombre y cargar la pagina
 - [ ] **General**
 - [ ] Agregar al final de los post y productos una section (componente) para compartir en redes sociales
 - [ ] Agrergar el que puedan colocar comentarios de fb
@@ -24,6 +21,9 @@
 
 - [ ] el diseño de la vista del **producto**
 - [ ] Dale estilos al **post** tipo medium
+  - [ ] Centrar la imagen
+  - [ ] el tituto complemante en mayusculas
+  - [ ] Eliminar los p vacios
 
 # Misc
 

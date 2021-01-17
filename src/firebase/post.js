@@ -33,7 +33,7 @@ const getPost = (id) =>
     .once("value")
     .then((post) => post.val());
 
-const updatePost = (post) => {};
+const updatePost = (post) => ref.child(`${ELEMENT}/${post.id}/`).update(post);
 
 const countPost = (type) => {
   const path = `/counter/${ELEMENT}/`;

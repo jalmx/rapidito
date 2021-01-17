@@ -33,7 +33,8 @@ const getProduct = (id) =>
     .once("value")
     .then((product) => product.val());
 
-const updateProduct = (product) => {};
+const updateProduct = (product) =>
+  ref.child(`${ELEMENT}/${product.id}/`).update(product);
 
 const countProduct = (type) => {
   const path = `/counter/${ELEMENT}/`;

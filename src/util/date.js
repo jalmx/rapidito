@@ -4,7 +4,10 @@ const date = new Date();
 
 export const buildDate = (date) =>
   moment(
-    `${date ? date.month : ""}-${date ? date.day : ""}-${date ? date.year : ""}`
+    `${date ? date.month : ""}-${date ? date.day : ""}-${
+      date ? date.year : ""
+    }`,
+    "MM-DD-YYYY"
   ).fromNow();
 
 export const getDate = () => ({

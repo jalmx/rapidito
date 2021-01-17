@@ -12,8 +12,9 @@ import style from "./index.module.scss";
 import { savePost, updatePost } from "../../firebase/post";
 import { saveProduct, updateProduct } from "../../firebase/product";
 import { getDate } from "../../util/date";
-import { EDIT_POST, EDIT_PRODUCT } from "../../util/constant";
+import { EDIT_POST, generataAbstract, PHOTO_URL } from "../../util/constant";
 
+let info = null;
 const dataProducto = () => (
   <div>
     <input type="number" placeholder="Precio" id="price" min="0" />
@@ -33,6 +34,7 @@ const EditorRapidito = (props) => {
     title,
     data: { type, data },
   } = props;
+  info = data;
   const [state, setState] = useState({
     editorState: EditorState.createEmpty(),
     onHTML: "",
@@ -42,7 +44,6 @@ const EditorRapidito = (props) => {
   });
 
   const loadData = (data) => {
-    console.log("loadData", data);
     document.getElementById("title").value = data.title;
     document.getElementById("imgUrl").value = data.imgUrl;
     onHTMLtoDraft(data.body);
@@ -85,54 +86,62 @@ const EditorRapidito = (props) => {
     onEditorStateChange(EditorState.createWithContent(stateNew));
   };
 
-  const onSavePost = () => {
+  const getPostFromUI = () => {
     let post = {};
+    if (info) post.id = info.id;
     post.title =
       document.getElementsByName("title")[0].value.trim() ||
       "Sin titulo de post";
-    post.imgUrl =
-      document.getElementsByName("imgUrl")[0].value.trim() ||
-      "https://lh5.googleusercontent.com/m_ETa2hMH1bjNlJaHfjvw4yAOFsQfGJOl1Xsc-_6UbxufTYuB8avJo8F6in8P7ZBVpysngUhMNy35i2-Wf0T=w790-h725";
+    post.imgUrl = info
+      ? info.imgUrl
+      : document.getElementsByName("imgUrl")[0].value.trim() || PHOTO_URL;
     post.body = getDrafttoHTML() || "";
-    post.abstract = state.content;
+    post.abstract = generataAbstract(state.content);
     post.date = getDate();
+    return post;
+  };
 
-    savePost(post)
+  const getProductFromUI = () => {
+    let product = {};
+    if (info) product.id = info.id;
+    product.title =
+      document.getElementsByName("title")[0].value.trim() ||
+      "Sin titulo de producto";
+    product.imgUrl = info
+      ? info.imgUrl
+      : document.getElementsByName("imgUrl")[0].value.trim() || PHOTO_URL;
+    product.body = getDrafttoHTML() || "";
+    product.abstract = generataAbstract(state.content);
+    product.date = getDate();
+    product.price = Number(document.getElementById("price").value.trim()) || 0;
+    product.start = Number(document.getElementById("start").value.trim()) || 5;
+    return product;
+  };
+
+  const onSavePost = () => {
+    savePost(getPostFromUI())
       .then((err) =>
         err
           ? alert("Fallo subir el post")
           : (() => {
               alert("Post guardado");
-              return (window.location = "/admin");
+              return onCancel();
             })()
       )
       .catch(() => alert("Fallo subir el post"));
   };
 
   const onSaveProduct = () => {
-    let product = {};
-    product.title =
-      document.getElementsByName("title")[0].value.trim() ||
-      "Sin titulo de producto";
-    product.imgUrl =
-      document.getElementsByName("imgUrl")[0].value.trim() ||
-      "https://firebasestorage.googleapis.com/v0/b/rapidito-gourmet.appspot.com/o/rapidito%2Flogo_Rapidito_card.png?alt=media&token=e1735353-824b-4f1f-ace3-67f19f6c529c";
-    product.body = getDrafttoHTML() || "";
-    product.abstract = state.content;
-    product.date = getDate();
-    product.price = Number(document.getElementById("price").value.trim()) || 0;
-    product.start = Number(document.getElementById("start").value.trim()) || 5;
-
-    saveProduct(product)
+    saveProduct(getProductFromUI())
       .then((err) =>
         err
           ? alert("Fallo subir el producto")
           : (() => {
               alert("Producto guardado");
-              return (window.location = "/admin");
+              return onCancel();
             })()
       )
-      .catch((err) => alert("Fallo subir el Product"));
+      .catch(() => alert("Fallo subir el Product"));
   };
 
   const onSave = (type) => {
@@ -140,14 +149,23 @@ const EditorRapidito = (props) => {
   };
 
   const onUpdatePost = () => {
-    updatePost();
+    updatePost(getPostFromUI()).then((err) =>
+      err
+        ? alert("Fallo actualizar el post, llamar a soporte técnico")
+        : onCancel()
+    );
   };
   const onUpdateProduct = () => {
-    updateProduct();
+    updateProduct(getProductFromUI()).then((err) =>
+      err
+        ? alert("Fallo actualizar el producto, llamar a soporte técnico")
+        : onCancel()
+    );
   };
 
-  const onUpdate = (element) => {
-    data.type === EDIT_POST ? onUpdatePost(element) : onUpdateProduct(element);
+  const onUpdate = (type) => {
+    console.log("update", type);
+    type === EDIT_POST ? onUpdatePost() : onUpdateProduct();
   };
 
   return (
@@ -185,7 +203,7 @@ const EditorRapidito = (props) => {
         <button onClick={onCancel} className="button_cancel">
           Cancelar
         </button>
-        <button onClick={() => (data ? onSave(title) : onUpdate())}>
+        <button onClick={() => (data ? onUpdate(type) : onSave(title))}>
           {data ? "Actualizar" : "Agregar"}
         </button>
       </div>
